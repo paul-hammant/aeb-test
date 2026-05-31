@@ -1,0 +1,20 @@
+// aeb-test — the subject of a triggered build.
+//
+// The smallest possible aeb Java build: one flat-root Main.java, compiled
+// by the java SDK. No source_layout setter → the javac builder defaults to
+// `find -maxdepth 1 -name '*.java'` (the flat-root layout), which is exactly
+// this repo's shape. No deps, no tests yet — baby steps.
+//
+// This file IS the build contract a leased aeb-agent runs when a dispatch
+// targets this repo: `aeb .build.ae` compiles Main.java to target/.
+
+import build
+import java
+import java (release)
+
+main() {
+    b = build.start()
+    java.javac(b) {
+        release("21")
+    }
+}
